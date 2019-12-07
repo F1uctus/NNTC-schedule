@@ -71,3 +71,4 @@ yarn-error.log
 .prettierrc
 .prettierignore
 .vscode
+.idea
