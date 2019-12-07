@@ -1,0 +1,177 @@
+@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+
+$bordRad: 10px;
+$pad: 8px;
+$darkBg: rgba(0, 0, 0, 0.6);
+
+main {
+  font-family: "Source Sans Pro", sans-serif;
+  color: #eaeaea;
+}
+
+section {
+  > *:not(:last-child) {
+    margin: 5px auto;
+  }
+
+  @media only screen and (min-width: 1024px) {
+    width: 80%;
+    margin: auto;
+    font-size: 1.5vw;
+  }
+}
+
+article,
+footer {
+  padding: $pad;
+  display: flex;
+  justify-content: center;
+  flex-flow: row wrap;
+  border-radius: $bordRad;
+  background-color: $darkBg;
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+#scheduleTable {
+  width: 100%;
+  border-spacing: 5px;
+
+  > thead > tr > th {
+    padding: $pad;
+    border-radius: $bordRad;
+    text-align: center;
+    color: #000000;
+    background-color: #25aae1;
+  }
+
+  > tbody {
+    margin: 10px;
+
+    > tr {
+      &:hover {
+        background-color: rgba(30, 30, 30, 0.6);
+      }
+
+      > td {
+        padding: $pad;
+        border-radius: $bordRad;
+        background-color: $darkBg;
+        animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        &:first-child {
+          color: #fb667a;
+        }
+
+        &:hover {
+          background-color: #fff842;
+          color: #403e10;
+          font-weight: bold;
+          box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
+            #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
+          /* cell hover animation */
+          transform: translate3d(6px, -6px, 0);
+          transition-duration: 0.3s;
+          transition-property: all;
+          transition-timing-function: line;
+        }
+      }
+    }
+  }
+}
+
+.lessonCell {
+  > tbody > tr {
+    font-weight: "bold";
+
+    > td:first-child {
+      text-align: center;
+    }
+  }
+}
+
+.groupBtn {
+  text-decoration: none;
+  font-weight: bold;
+  color: #000000;
+  padding: $pad;
+  margin: 4px;
+  border: none;
+  border-radius: $bordRad;
+  min-width: fit-content;
+  background-image: linear-gradient(
+    to right,
+    #25aae1,
+    #4481eb,
+    #04befe,
+    #3f86ed
+  );
+  background-size: 300% 100%;
+  transition: all 0.4s ease-in-out;
+
+  &:hover {
+    background-position: 100% 0;
+  }
+}
+
+#nntc-name {
+  font-size: default;
+}
+
+/* portrait table layout */
+@media screen and (max-width: 768px) {
+  #scheduleTable {
+    > thead {
+      display: none;
+    }
+
+    > tbody > tr {
+      display: flexbox;
+
+      &:hover {
+        background-color: #00000000;
+      }
+
+      > td {
+        display: block;
+        margin: 0 0 3px 0;
+        padding: 0px;
+
+        &:first-child {
+          padding: $pad;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .lessonCell > tbody > tr {
+    display: inline;
+  }
+}
+
+/* load animations */
+@keyframes swing-in-top-fwd {
+  0% {
+    transform: rotateX(-100deg);
+    transform-origin: top;
+    opacity: 0;
+  }
+
+  100% {
+    transform: rotateX(0deg);
+    transform-origin: top;
+    opacity: 1;
+  }
+}
+
+@keyframes scale-in-center {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
