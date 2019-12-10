@@ -118,15 +118,13 @@ footer {
 }
 
 /* portrait table layout */
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 640px) {
   #scheduleTable {
     > thead {
       display: none;
     }
 
     > tbody > tr {
-      display: flexbox;
-
       &:hover {
         background-color: #00000000;
       }
@@ -144,8 +142,15 @@ footer {
     }
   }
 
-  .lessonCell > tbody > tr {
-    display: inline;
+  .lessonCell {
+    width: 100%;
+    > tbody {
+      display: flex;
+      justify-content: space-evenly;
+      > tr {
+        display: inline;
+      }
+    }
   }
 }
 
