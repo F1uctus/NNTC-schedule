@@ -1,7 +1,7 @@
 {
-  "name": "gatsby-starter-hello-world",
+  "name": "nntc-schedule",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
+  "description": "Timetable for NNTC",
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {

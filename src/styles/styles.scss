@@ -1,78 +1,98 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro);
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 
-$bordRad: 10px;
-$pad: 8px;
-$darkBg: rgba(0, 0, 0, 0.6);
+$padding: 8px;
+$max-mobile-w: 640px;
 
-main {
-  font-family: "Source Sans Pro", sans-serif;
+// base classes
+.container {
+  border-radius: 20px;
+  padding: $padding;
+}
+
+.dark-container {
+  @extend .container;
+  background-color: rgba(0, 0, 0, 0.6);
+  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+// ============
+body {
+  margin: 0;
+  font-family: "Roboto", sans-serif;
   color: #eaeaea;
 }
 
 section {
-  > *:not(:last-child) {
+  margin: auto 1vw;
+  > * {
     margin: 5px auto;
   }
-
-  @media only screen and (min-width: 1024px) {
-    width: 80%;
+  @media screen and (min-width: 1024px) {
+    // side space on laptops
+    width: 85%;
     margin: auto;
     font-size: 1.5vw;
   }
 }
 
-article,
-footer {
-  padding: $pad;
+article {
+  @extend .dark-container;
   display: flex;
   justify-content: center;
   flex-flow: row wrap;
-  border-radius: $bordRad;
-  background-color: $darkBg;
-  animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: scale-in-center 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+footer {
+  @extend .dark-container;
 }
 
 #scheduleTable {
   width: 100%;
-  border-spacing: 5px;
-
-  > thead > tr > th {
-    padding: $pad;
-    border-radius: $bordRad;
-    text-align: center;
-    color: #000000;
-    background-color: #25aae1;
+  > thead {
+    @media screen and (max-width: $max-mobile-w) {
+      // hide timetable headers on mobile
+      display: none;
+    }
+    > tr > th {
+      @extend .container;
+      text-align: center;
+      color: #000000;
+      background-color: #25aae1;
+    }
   }
-
-  > tbody {
-    margin: 10px;
-
-    > tr {
-      &:hover {
+  > tbody > tr {
+    &:hover {
+      @media screen and (min-width: $max-mobile-w) {
+        // row highlighting on wide screens
         background-color: rgba(30, 30, 30, 0.6);
       }
-
-      > td {
-        padding: $pad;
-        border-radius: $bordRad;
-        background-color: $darkBg;
-        animation: swing-in-top-fwd 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-
+    }
+    > td {
+      @extend .dark-container;
+      animation: swing-in-top-fwd 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      &:first-child {
+        // header
+        color: #fb667a;
+        text-align: center;
+      }
+      &:hover {
+        // animated lesson cell
+        background-color: #fff842;
+        color: #403e10;
+        box-shadow: #7f7c21 -3px 3px;
+        transform: translate3d(3px, -3px, 0);
+        transition-duration: 0.3s;
+        transition-property: all;
+        transition-timing-function: line;
+      }
+      @media screen and (max-width: $max-mobile-w) {
+        // stack cells
+        display: block;
+        margin: 0 0 3px 0;
+        padding: 0px;
         &:first-child {
-          color: #fb667a;
-        }
-
-        &:hover {
-          background-color: #fff842;
-          color: #403e10;
-          font-weight: bold;
-          box-shadow: #7f7c21 -1px 1px, #7f7c21 -2px 2px, #7f7c21 -3px 3px,
-            #7f7c21 -4px 4px, #7f7c21 -5px 5px, #7f7c21 -6px 6px;
-          /* cell hover animation */
-          transform: translate3d(6px, -6px, 0);
-          transition-duration: 0.3s;
-          transition-property: all;
-          transition-timing-function: line;
+          padding: $padding;
         }
       }
     }
@@ -80,24 +100,30 @@ footer {
 }
 
 .lessonCell {
-  > tbody > tr {
-    font-weight: "bold";
-
-    > td:first-child {
-      text-align: center;
+  width: 100%;
+  > tbody {
+    @media screen and (max-width: $max-mobile-w) {
+      // lesson cell -> row on mobile
+      display: flex;
+      justify-content: space-evenly;
+      > tr {
+        display: inline;
+      }
+    }
+    > tr {
+      > td:first-child {
+        text-align: center;
+      }
     }
   }
 }
 
 .groupBtn {
+  @extend .container;
   text-decoration: none;
-  font-weight: bold;
   color: #000000;
-  padding: $pad;
   margin: 4px;
   border: none;
-  border-radius: $bordRad;
-  min-width: fit-content;
   background-image: linear-gradient(
     to right,
     #25aae1,
@@ -107,54 +133,12 @@ footer {
   );
   background-size: 300% 100%;
   transition: all 0.4s ease-in-out;
-
   &:hover {
     background-position: 100% 0;
   }
 }
 
-#nntc-name {
-  font-size: default;
-}
-
-/* portrait table layout */
-@media screen and (max-width: 640px) {
-  #scheduleTable {
-    > thead {
-      display: none;
-    }
-
-    > tbody > tr {
-      &:hover {
-        background-color: #00000000;
-      }
-
-      > td {
-        display: block;
-        margin: 0 0 3px 0;
-        padding: 0px;
-
-        &:first-child {
-          padding: $pad;
-          text-align: center;
-        }
-      }
-    }
-  }
-
-  .lessonCell {
-    width: 100%;
-    > tbody {
-      display: flex;
-      justify-content: space-evenly;
-      > tr {
-        display: inline;
-      }
-    }
-  }
-}
-
-/* load animations */
+// load animations
 @keyframes swing-in-top-fwd {
   0% {
     transform: rotateX(-100deg);

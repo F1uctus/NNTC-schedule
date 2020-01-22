@@ -8,7 +8,7 @@ let hours = new Date().getHours()
 let bgImg = hours < 7 || hours > 18 ? nImg : dImg
 
 const Background = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
@@ -26,6 +26,7 @@ const Logo = styled.div`
   background: url("${logoImg}") no-repeat;
   background-size: 64px 64px;
   min-width: 64px;
+  max-width: 64px;
   min-height: 64px;
 `
 
@@ -103,6 +104,12 @@ export default ({ pageContext: { days } }) => (
             <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
             <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
           </DayRow>
+          <DayRow weekDay="Вторник" day="3 декабря">
+            <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
+            <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
+            <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
+            <LessonCell name="История" teacher="Аксельрод А. А." place="203" />
+          </DayRow>
         </tbody>
       </table>
       <article style={{ width: "fit-content" }}>
@@ -129,8 +136,8 @@ export default ({ pageContext: { days } }) => (
         </a>
       </article>
       <footer>
-        <Logo></Logo>
-        
+        <a href="https://nntc.nnov.ru"><Logo></Logo></a>
+        Нижегородский радиотехнический колледж
       </footer>
     </section>
   </main>
